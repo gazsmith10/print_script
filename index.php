@@ -78,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sku_list'])) {
 
     // Generate SQL Insert Statements for SKUs
     $skus = explode(",", $_POST['sku_list']); // Split the SKU list by commas
+    $sqlStatements = ''; 
     foreach ($skus as $sku) {
         $sku = trim($sku); // Trim any extra spaces
 
@@ -93,60 +94,130 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sku_list'])) {
         $sql = "INSERT INTO `printable_product_configs` (`id`, `sku`, `print_size_config_id`, `total_prints`, `background_colour`, `print_background_colour`, `forced_orientation`, `location_preview_image`, `has_canvas_mask_safe_area`, `canvas_mask`, `clipping_mask`, `overlay_mask`, `print_template_id`, `created_at`, `updated_at`, `deleted_at`) 
                 VALUES (NULL, '$sku', '{$size_data['id']}', '$total_prints', '$background_colour', '$print_background_colour', '$orientation', '$location_preview_image', '$has_canvas_mask_safe_area', '$canvas_mask', '$clipping_mask', '$overlay_mask', '{$template_data['id']}', NULL, NULL, NULL);";
 
-        // Output each SQL statement
-        echo "<p>$sql</p>";
+        // Append the SQL statement to the string
+        $sqlStatements .= "<p>$sql</p>";
     }
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate SQL Insert Statements</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Add Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
-    <h2>Generate SQL Insert Statements</h2>
-<form method="POST">
-    <textarea name="sku_list" rows="5" cols="50" placeholder="Enter SKUs here..."></textarea><br><br>
-    <label for="template_id">Select Template:</label>
-    <select name="template_id">
-        <?php foreach ($templates as $template): ?>
-            <option value="<?= $template['id']; ?>"><?= $template['label']; ?></option>
-        <?php endforeach; ?>
-    </select><br><br>
+<body class="bg-light py-5">
 
-    <!-- Add additional fields for user input -->
-    <label for="total_prints">Total Prints:</label>
-    <input type="number" name="total_prints" value="1"><br><br>
+<div class="container">
+    <h2 class="text-center mb-4">Generate SQL Insert Statements</h2>
 
-    <label for="background_colour">Background Colour:</label>
-    <input type="text" name="background_colour" value=""><br><br>
+    <form method="POST" class="bg-white p-4 border rounded shadow-sm">
+        <div class="mb-3">
+            <label for="sku_list" class="form-label">Enter SKUs:</label>
+            <textarea name="sku_list" id="sku_list" rows="5" class="form-control" placeholder="Enter SKUs here..."></textarea>
+        </div>
 
-    <label for="print_background_colour">Print Background Colour:</label>
-    <input type="number" name="print_background_colour" value="0"><br><br>
+        <div class="mb-3">
+            <label for="template_id" class="form-label">Select Template:</label>
+            <select name="template_id" id="template_id" class="form-select">
+                <?php foreach ($templates as $template): ?>
+                    <option value="<?= $template['id']; ?>"><?= $template['label']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
 
-    <label for="forced_orientation">Forced Orientation (portrait/landscape):</label>
-    <input type="text" name="forced_orientation" value=<?php echo $orientation ?>><br><br>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="total_prints" class="form-label">Total Prints:</label>
+                <input type="number" name="total_prints" id="total_prints" class="form-control" value="1">
+            </div>
 
-    <label for="location_preview_image">Location Preview Image:</label>
-    <input type="text" name="location_preview_image" value=""><br><br>
+            <div class="col-md-4 mb-3">
+                <label for="background_colour" class="form-label">Background Colour:</label>
+                <input type="text" name="background_colour" id="background_colour" class="form-control" value="">
+            </div>
 
-    <label for="has_canvas_mask_safe_area">Has Canvas Mask Safe Area (1/0):</label>
-    <input type="number" name="has_canvas_mask_safe_area" value="0"><br><br>
+            <div class="col-md-4 mb-3">
+                <label for="print_background_colour" class="form-label">Print Background Colour:</label>
+                <input type="number" name="print_background_colour" id="print_background_colour" class="form-control" value="0">
+            </div>
+        </div>
 
-    <label for="canvas_mask">Canvas Mask:</label>
-    <input type="text" name="canvas_mask" value=""><br><br>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="forced_orientation" class="form-label">Forced Orientation (portrait/landscape):</label>
+                <input type="text" name="forced_orientation" id="forced_orientation" class="form-control" value="portrait">
+            </div>
 
-    <label for="clipping_mask">Clipping Mask:</label>
-    <input type="text" name="clipping_mask" value=""><br><br>
+            <div class="col-md-4 mb-3">
+                <label for="location_preview_image" class="form-label">Location Preview Image:</label>
+                <input type="text" name="location_preview_image" id="location_preview_image" class="form-control" value="">
+            </div>
 
-    <label for="overlay_mask">Overlay Mask:</label>
-    <input type="text" name="overlay_mask" value=""><br><br>
+            <div class="col-md-4 mb-3">
+                <label for="has_canvas_mask_safe_area" class="form-label">Has Canvas Mask Safe Area (1/0):</label>
+                <input type="number" name="has_canvas_mask_safe_area" id="has_canvas_mask_safe_area" class="form-control" value="0">
+            </div>
+        </div>
 
-    <button type="submit">Generate SQL</button>
-</form>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="canvas_mask" class="form-label">Canvas Mask:</label>
+                <input type="text" name="canvas_mask" id="canvas_mask" class="form-control" value="">
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="clipping_mask" class="form-label">Clipping Mask:</label>
+                <input type="text" name="clipping_mask" id="clipping_mask" class="form-control" value="">
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="overlay_mask" class="form-label">Overlay Mask:</label>
+                <input type="text" name="overlay_mask" id="overlay_mask" class="form-control" value="">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Generate SQL</button>
+    </form>
+
+    <!-- Bootstrap Modal to display SQL -->
+    <?php if (isset($sqlStatements) && !empty($sqlStatements)): ?>
+        <div class="modal fade" id="sqlModal" tabindex="-1" aria-labelledby="sqlModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="sqlModalLabel">Generated SQL Statements</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <?= $sqlStatements; ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="copySQL()">Copy to Clipboard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var sqlModal = new bootstrap.Modal(document.getElementById('sqlModal'));
+            sqlModal.show();
+
+            function copySQL() {
+                var range = document.createRange();
+                range.selectNode(document.querySelector('.modal-body'));
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+            }
+        </script>
+    <?php endif; ?>
+</div>
+
 
 </body>
 </html>
