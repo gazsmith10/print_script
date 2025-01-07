@@ -137,7 +137,7 @@ session_start();
 
                     // Iterate through each row
                     while (($row = fgetcsv($csvFile, 1000, ",")) !== FALSE) {
- 
+
                         $data = array_combine($sanitizedHeaders, $row);
 
                         // Check if array_combine succeeded
@@ -147,7 +147,7 @@ session_start();
                         }
 
                         // Ensure required fields exist
-                        $requiredFields = ['sku', 'print_size_config_id', 'has_canvas_mask_safe_area'];
+                        $requiredFields = ['group_description', 'print_size_config_id', 'has_canvas_mask_safe_area'];
                         $missingFields = [];
                         foreach ($requiredFields as $field) {
                             if (!array_key_exists($field, $data)) {
@@ -215,17 +215,20 @@ session_start();
                         // Check if print_size_config_id is 0
                         if ($data['print_size_config_id'] === 0) {
                         
-                            $description = $data['sku'];
+                            $description = $data['group_description'];
                             $width_mm = isset($data['width']) ? $data['width'] : 'NULL';
                             $height_mm = isset($data['height']) ? $data['height'] : 'NULL';
                             $final_dpi = isset($data['dpi']) ? $data['dpi'] : 'NULL';
 
-                            $sqlPrintSizeConfig = "INSERT INTO `print_size_configs` (`description`, `width_mm`, `height_mm`, `final_dpi`, `created_at`, `updated_at`) VALUES ";
+                           
+
+                            // Use INSERT IGNORE to prevent duplicate descriptions
+                            $sqlPrintSizeConfig = "INSERT IGNORE INTO `print_size_configs` (`description`, `width_mm`, `height_mm`, `final_dpi`, `created_at`, `updated_at`) VALUES ";
                             $sqlPrintSizeConfig .= "({$description}, {$width_mm}, {$height_mm}, {$final_dpi}, NOW(), NOW());\n";
 
                             $sqlStatements .= $sqlPrintSizeConfig;
 
-                            // Use LAST_INSERT_ID() to capture the newly inserted id
+                            // Use LAST_INSERT_ID() to capture the newly inserted id only if a new row was inserted
                             $sqlStatements .= "SET @new_print_size_config_id = LAST_INSERT_ID();\n";
 
                             // Use the captured id in the printable_product_configs insert

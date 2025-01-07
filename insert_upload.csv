@@ -1,33 +1,33 @@
-﻿sku,print_size_config_id,total_prints,width,height,dpi,background_colour,print_background_colour,forced_orientation,"has_canvas_mask_safe_area	",canvas_mask,clipping_mask,overlay_mask,print_template_id
-ABC8K132-BRANDED,0,2,380,250,300,,0,0,0,,null,null,217
-DDB-21K-BRANDED,0,1,265,225,300,,0,1,0,,null,null,190
-DDB-21K-WL-BRANDED,0,1,265,225,300,,0,1,0,,null,null,190
-DDT01K-BRANDED,0,1,506,556,300,,0,1,0,,null,null,332
-DDT01K-WL-BRANDED,0,1,506,556,300,,0,1,0,,null,null,332
-DDT01W-BRANDED,0,1,577,625,300,,0,1,0,,null,null,332
-DDT01W-WL-BRANDED,0,1,577,625,300,,0,1,0,,null,null,332
-DDT-55K-BRANDED,174,1,708,480,300,,0,1,0,,null,null,228
-DDT-55K-WL-BRANDED,174,1,708,480,300,,0,1,0,,null,null,228
-DDV-43KT-BRANDED,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-43KT-BRANDED-CMS,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-43KT-BRANDED-CMS-3YRS,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-43KT-WL-BRANDED,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-43KT-WL-BRANDED-CMS,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-43KT-WL-BRANDED-CMS-3YRS,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-43WT-BRANDED,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-43WT-BRANDED-CMS,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-43WT-BRANDED-CMS-3YRS,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-43WT-WL-BRANDED,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-43WT-WL-BRANDED-CMS,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-43WT-WL-BRANDED-CMS-3YRS,0,1,596,625,300,,0,1,0,,null,null,192
-DDV-49KT-BRANDED,0,1,596,625,300,,0,1,0,,null,null,326
-DDV-49KT-CMS-1-BRANDED,0,1,596,625,300,,0,1,0,,null,null,326
-DDV-49KT-CMS-3-BRANDED,0,1,596,625,300,,0,1,0,,null,null,326
-DDV-49KT-WL-BRANDED,0,1,596,625,300,,0,1,0,,null,null,326
-DDV-49KT-WL-CMS-1-BRANDED,0,1,596,625,300,,0,1,0,,null,null,326
-DDV-49KT-WL-CMS-3-BRANDED,0,1,596,625,300,,0,1,0,,null,null,326
-SBP-22B-BRANDED,0,1,227,98,300,,0,0,0,,null,null,338
-SBP-22G-BRANDED,0,1,227,98,300,,0,0,0,,null,null,338
-SBP-22K-BRANDED,0,1,227,98,300,,0,0,0,,null,null,338
-SBP-22R-BRANDED,0,1,227,98,300,,0,0,0,,null,null,338
-SBP38R-BRANDED,0,1,180,40,300,,0,0,0,,null,null,331
+﻿sku,group_description,print_size_config_id,total_prints,width,height,dpi,background_colour,print_background_colour,forced_orientation,"has_canvas_mask_safe_area	",canvas_mask,clipping_mask,overlay_mask,print_template_id,notes_background_colour,notes_description
+ABC8K132-BRANDED,ABC8K132,0,2,380,250,300,,0,0,0,,null,null,217,black,Tall Thin Chalkboard Sandwich Board
+DDB-21K-BRANDED,DDB-21K,0,1,265,225,300,,0,1,0,,null,null,190,black,Freestanding Digital Signage with Brochure Holder
+DDB-21K-WL-BRANDED,DDB-21K,0,1,265,225,300,,0,1,0,,null,null,190,black,Freestanding Digital Signage with Brochure Holder
+DDT01K-BRANDED,DDT01K,0,1,506,556,300,,0,1,0,,null,null,332,black,Digital Display Totem
+DDT01K-WL-BRANDED,DDT01K,0,1,506,556,300,,0,1,0,,null,null,332,black,Digital Display Totem
+DDT01W-BRANDED,DDT01W,0,1,577,625,300,,0,1,0,,null,null,332,black,Digital Display Totem
+DDT01W-WL-BRANDED,DDT01W,0,1,577,625,300,,0,1,0,,null,null,332,black,Digital Display Totem
+DDT-55K-BRANDED,DDT-55K,174,1,708,480,300,,0,1,0,,null,null,228,black,Digital Display Totem
+DDT-55K-WL-BRANDED,DDT-55K,174,1,708,480,300,,0,1,0,,null,null,228,black,Digital Display Totem
+DDV-43KT-BRANDED,DDV-43KT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-43KT-BRANDED-CMS,DDV-43KT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-43KT-BRANDED-CMS-3YRS,DDV-43KT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-43KT-WL-BRANDED,DDV-43KT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-43KT-WL-BRANDED-CMS,DDV-43KT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-43KT-WL-BRANDED-CMS-3YRS,DDV-43KT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-43WT-BRANDED,DDV-43WT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-43WT-BRANDED-CMS,DDV-43WT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-43WT-BRANDED-CMS-3YRS,DDV-43WT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-43WT-WL-BRANDED,DDV-43WT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-43WT-WL-BRANDED-CMS,DDV-43WT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-43WT-WL-BRANDED-CMS-3YRS,DDV-43WT,0,1,596,625,300,,0,1,0,,null,null,192,black,Digital Display Totem
+DDV-49KT-BRANDED,DDV-49KT,0,1,596,625,300,,0,1,0,,null,null,326,black,Digital Display Totem
+DDV-49KT-CMS-1-BRANDED,DDV-49KT,0,1,596,625,300,,0,1,0,,null,null,326,black,Digital Display Totem
+DDV-49KT-CMS-3-BRANDED,DDV-49KT,0,1,596,625,300,,0,1,0,,null,null,326,black,Digital Display Totem
+DDV-49KT-WL-BRANDED,DDV-49KT,0,1,596,625,300,,0,1,0,,null,null,326,black,Digital Display Totem
+DDV-49KT-WL-CMS-1-BRANDED,DDV-49KT,0,1,596,625,300,,0,1,0,,null,null,326,black,Digital Display Totem
+DDV-49KT-WL-CMS-3-BRANDED,DDV-49KT,0,1,596,625,300,,0,1,0,,null,null,326,black,Digital Display Totem
+SBP-22B-BRANDED,SBP-22B,0,1,227,98,300,,0,0,0,,null,null,338,blue,Plastic Shopping Basket
+SBP-22G-BRANDED,SBP-22G,0,1,227,98,300,,0,0,0,,null,null,338,green,Plastic Shopping Basket
+SBP-22K-BRANDED,SBP-22K,0,1,227,98,300,,0,0,0,,null,null,338,black,Plastic Shopping Basket
+SBP-22R-BRANDED,SBP-22R,0,1,227,98,300,,0,0,0,,null,null,338,red,Plastic Shopping Basket
+SBP38R-BRANDED,SBP38R,0,1,180,40,300,,0,0,0,,null,null,331,red,Wheeled Shopping Basket
