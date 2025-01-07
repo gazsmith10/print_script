@@ -116,7 +116,7 @@ session_start();
                         exit;
                     }
 
-                    // Sanitizee
+                    // Sanitize headers
                     $sanitizedHeaders = array_map(function($header, $index) {
                         $header = trim($header, '"'); // Remove quotes
                         if ($index === 0) {
@@ -130,25 +130,19 @@ session_start();
                     }, $headers, array_keys($headers));
 
                     // Define which fields are numeric (no quotes in SQL)
-                    $numericFields = ['print_size_config_id', 'total_prints', 'width', 'height', 'dpi', 'print_template_id'];
+                    $numericFields = ['print_size_config_id', 'total_prints', 'width', 'height', 'dpi', 'print_template_id', 'forced_orientation'];
 
                     // Initialize SQL statements
                     $sqlStatements = "";
 
                     // Iterate through each row
                     while (($row = fgetcsv($csvFile, 1000, ",")) !== FALSE) {
-             
+ 
                         $data = array_combine($sanitizedHeaders, $row);
 
                         // Check if array_combine succeeded
                         if ($data === FALSE) {
                             echo "<p class='error'>Error: Column mismatch in CSV row. Expected " . count($sanitizedHeaders) . " columns, found " . count($row) . ".</p>";
-                            // Uncomment for debugging to show the problamatic lines
-                            /*
-                            echo "<pre>Row Data:\n";
-                            print_r($row);
-                            echo "</pre>";
-                            */
                             continue; // Skip this row and continue with the next 
                         }
 
@@ -186,10 +180,37 @@ session_start();
                                         $data[$key] = (int)$value;
                                     }
                                 } else {
-                                    // Escape single quotes for SQ L
+                                    // Escape single quotes for SQL
                                     $data[$key] = "'" . addslashes($value) . "'";
                                 }
                             }
+                        }
+
+                        // **New Logic for forced_orientation**
+                        if (isset($data['forced_orientation'])) {
+                            if ($data['forced_orientation'] === 0) {
+                                $data['forced_orientation'] = 'NULL';
+                            } elseif ($data['forced_orientation'] === 1) {
+                                // Ensure width and height are available and numeric
+                                if (isset($data['width']) && isset($data['height']) && is_numeric($data['width']) && is_numeric($data['height'])) {
+                                    if ($data['width'] > $data['height']) {
+                                        $data['forced_orientation'] = "'landscape'";
+                                    } else {
+                                        $data['forced_orientation'] = "'portrait'";
+                                    }
+                                } else {
+                                    // If width or height is missing or not numeric, set to NULL or handle as needed
+                                    echo "<p class='error'>Error: Width and Height must be numeric for forced_orientation calculation.</p>";
+                                    $data['forced_orientation'] = 'NULL';
+                                }
+                            } else {
+                                // Handle unexpected values (optional)
+                                echo "<p class='error'>Error: Invalid value for forced_orientation. Expected 0 or 1, found '{$data['forced_orientation']}'.</p>";
+                                $data['forced_orientation'] = 'NULL';
+                            }
+                        } else {
+                            // If forced_orientation is not set, set to NULL or handle as needed
+                            $data['forced_orientation'] = 'NULL';
                         }
 
                         // Check if print_size_config_id is 0
@@ -240,7 +261,6 @@ session_start();
                     }
 
                     fclose($csvFile);
-
           
                     echo "<h2>Generated SQL Statements:</h2>";
                     echo "<textarea readonly>{$sqlStatements}</textarea>";
