@@ -186,7 +186,7 @@ session_start();
                             }
                         }
 
-                        // **New Logic for forced_orientation**
+                        // New Logic for forced_orientation
                         if (isset($data['forced_orientation'])) {
                             if ($data['forced_orientation'] === 0) {
                                 $data['forced_orientation'] = 'NULL';
@@ -199,17 +199,16 @@ session_start();
                                         $data['forced_orientation'] = "'portrait'";
                                     }
                                 } else {
-                                    // If width or height is missing or not numeric, set to NULL or handle as needed
+                                    // If width or height is missing or not numeric, set to NULL
                                     echo "<p class='error'>Error: Width and Height must be numeric for forced_orientation calculation.</p>";
                                     $data['forced_orientation'] = 'NULL';
                                 }
                             } else {
-                                // Handle unexpected values (optional)
                                 echo "<p class='error'>Error: Invalid value for forced_orientation. Expected 0 or 1, found '{$data['forced_orientation']}'.</p>";
                                 $data['forced_orientation'] = 'NULL';
                             }
                         } else {
-                            // If forced_orientation is not set, set to NULL or handle as needed
+                            // If forced_orientation is not set, set to NULL
                             $data['forced_orientation'] = 'NULL';
                         }
 
